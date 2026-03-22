@@ -2,3 +2,5 @@
 .terraform/*
 *.ipynb
 *.pq
+*.pyi
+lambda/*/pkg/*
