@@ -1,9 +1,7 @@
-import botocore.client
-import polars as pl
 import boto3
-import botocore
-from jinja2 import Environment, FileSystemLoader, select_autoescape
+import polars as pl
 from great_tables import GT
+from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 
 def read_from_s3(client, bucket: str, key: str) -> pl.DataFrame:
@@ -32,11 +30,11 @@ def lambda_handler(event, context):
         bucket = payload["bucket"]
         key = payload["key"]
         print(payload)
-        df = GT(read_from_s3(s3_client,bucket,key))
+        df = GT(read_from_s3(s3_client, bucket, key))
 
-        if payload["func"]=="corr":
+        if payload["func"] == "corr":
             template_inputs["corr_df"] = df
-        elif payload["func"]=="stat":
+        elif payload["func"] == "stat":
             template_inputs["stat_df"] = df
 
     # bucket: str = event["input"]["bucket"]

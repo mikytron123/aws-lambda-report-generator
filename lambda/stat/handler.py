@@ -1,5 +1,5 @@
-import polars as pl
 import boto3
+import polars as pl
 
 
 def read_from_s3(client, bucket: str, key: str) -> pl.DataFrame:
@@ -27,4 +27,4 @@ def lambda_handler(event, context):
     df = read_from_s3(s3_client, bucket, key)
     stat_df = df.describe()
     write_to_s3(s3_client, stat_df, "output", "stat.pq")
-    return {"func":"stat","bucket":"output","key":"stat.pq"}
+    return {"func": "stat", "bucket": "output", "key": "stat.pq"}

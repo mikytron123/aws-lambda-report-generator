@@ -1,6 +1,6 @@
+import boto3
 import polars as pl
 import polars.selectors as cs
-import boto3
 
 
 def read_from_s3(client, bucket: str, key: str) -> pl.DataFrame:
@@ -32,6 +32,6 @@ def lambda_handler(event, context):
     )
     cols_order = ["cols"] + numeric_df.columns
     corr_df = corr_df[cols_order]
-    
+
     write_to_s3(s3_client, corr_df, "output", "corr.pq")
-    return {"func":"corr","bucket":"output","key":"corr.pq"}
+    return {"func": "corr", "bucket": "output", "key": "corr.pq"}
